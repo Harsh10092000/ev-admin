@@ -30,153 +30,223 @@
   <!-- Custom Styles -->
   <style>
     :root {
-      --primary-color: #60a5fa; /* Lighter blue */
-      --secondary-color: #f3f4f6; /* Very light gray */
-      --accent-color: #22c55e; /* Bright green */
-      --text-color: #374151; /* Soft dark gray */
+      --primary-color: #3182ce; /* Primary blue from table design */
+      --secondary-color: #edf2f7; /* Light gray from table header/footer */
+      --accent-color: #38a169; /* Green for success alerts */
+      --text-color: #2d3748; /* Dark gray for primary text */
+      --muted-text-color: #4a5568; /* Muted gray for secondary text */
+      --border-color: #e2e8f0; /* Border color from table design */
       --sidebar-width: 260px;
     }
 
     body {
-      background: #f9fafb; /* Even lighter background */
+      background: #f9fafb; /* Match table background */
       color: var(--text-color);
-      font-family: 'Poppins', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; /* Match table typography */
     }
 
+    /* Header Styles */
     .header {
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb; /* Lighter border */
-      padding: 1rem 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03); /* Softer shadow */
+      background: #fff; /* White background */
+      border-bottom: 1px solid var(--border-color); /* Match table border */
+      padding: 0.75rem 1.5rem; /* Reduced padding for a compact look */
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Match table shadow */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
     }
 
     .logo {
-      gap: 10px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; /* Smaller gap for a tighter look */
     }
 
     .logo img {
-      height: 40px;
-      transition: transform 0.3s ease;
+      height: 32px; /* Smaller logo to match minimal design */
+      transition: transform 0.2s ease;
     }
 
     .logo img:hover {
-      transform: scale(1.1);
+      transform: scale(1.05); /* Subtle hover effect */
     }
 
     .logo span {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--primary-color);
+      font-size: 1.25rem; /* Slightly smaller for a cleaner look */
+      font-weight: 600; /* Match table heading weight */
+      color: var(--text-color); /* Match primary text color */
     }
 
     .toggle-sidebar-btn {
-      color: var(--primary-color);
-      font-size: 1.5rem;
-      transition: transform 0.3s ease, color 0.3s ease;
+      color: var(--muted-text-color); /* Match muted text color */
+      font-size: 1.25rem; /* Smaller icon */
+      transition: color 0.2s ease;
+      background: none;
+      border: none;
+      padding: 0.5rem;
     }
 
     .toggle-sidebar-btn:hover {
-      transform: rotate(90deg);
-      color: #3b82f6; /* Slightly darker blue on hover */
-    }
-
-    .sidebar {
-      background: #ffffff;
-      border-right: 1px solid #e5e7eb; /* Lighter border */
-      width: var(--sidebar-width);
-      padding: 1.5rem 0; /* More padding */
-      transition: all 0.3s ease;
-    }
-
-    .nav-link {
-      margin: 6px 10px;
-      padding: 12px 15px;
-      border-radius: 12px;
-      color: var(--text-color);
-      font-weight: 500;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 12px; /* Slightly larger gap */
-    }
-
-    .nav-link:hover {
-      background: var(--secondary-color);
-      color: var(--primary-color);
-    }
-
-    .nav-link.active {
-      background: var(--primary-color);
-      color: #ffffff;
-      box-shadow: 0 2px 10px rgba(96,165,250,0.3); /* Lighter shadow */
-    }
-
-    .nav-content .nav-link {
-      padding-left: 40px;
-      font-size: 0.9rem;
-      font-weight: 400;
-    }
-
-    .nav-content .nav-link.active {
-      background: var(--secondary-color);
-      color: var(--primary-color);
+      color: var(--primary-color); /* Match primary color on hover */
     }
 
     .header-nav .nav-profile {
-      gap: 8px;
-      padding: 8px 15px;
-      border-radius: 25px;
-      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; /* Smaller gap */
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px; /* Match table button border-radius */
+      transition: all 0.2s ease;
     }
 
     .header-nav .nav-profile:hover {
-      background: var(--secondary-color);
+      background: var(--secondary-color); /* Match table hover background */
     }
 
     .nav-profile img {
-      width: 32px;
-      height: 32px;
-      border: 2px solid var(--primary-color);
-      transition: transform 0.3s ease;
+      width: 28px; /* Smaller profile image */
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color); /* Subtle border */
+      transition: transform 0.2s ease;
     }
 
     .nav-profile:hover img {
-      transform: scale(1.1);
+      transform: scale(1.05); /* Subtle hover effect */
+    }
+
+    .nav-profile span {
+      font-size: 0.875rem; /* Match table font size */
+      color: var(--muted-text-color); /* Match muted text color */
+      font-weight: 500; /* Match table font weight */
     }
 
     .dropdown-menu {
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Softer shadow */
-      border: none;
-      margin-top: 10px;
-      background: #ffffff;
+      border-radius: 8px; /* Match table border-radius */
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Match table shadow */
+      border: 1px solid var(--border-color); /* Match table border */
+      margin-top: 0.5rem;
+      background: #fff;
+      font-size: 0.875rem; /* Match table font size */
     }
 
     .dropdown-item {
-      padding: 8px 15px;
-      border-radius: 8px;
+      padding: 0.5rem 1rem; /* Match table padding */
+      border-radius: 6px; /* Match table button border-radius */
       margin: 2px 5px;
-      color: var(--text-color);
-      transition: all 0.3s ease;
+      color: var(--muted-text-color); /* Match muted text color */
+      transition: all 0.2s ease;
     }
 
     .dropdown-item:hover {
-      background: var(--secondary-color);
-      color: var(--primary-color);
+      background: var(--secondary-color); /* Match table hover background */
+      color: var(--text-color); /* Match primary text color */
     }
 
+    .dropdown-header {
+      padding: 0.5rem 1rem;
+      color: var(--text-color); /* Match primary text color */
+    }
+
+    .dropdown-header h6 {
+      font-size: 0.875rem; /* Match table font size */
+      font-weight: 500; /* Match table font weight */
+      margin-bottom: 0.25rem;
+    }
+
+    .dropdown-header span {
+      font-size: 0.75rem; /* Smaller for secondary text */
+      color: var(--muted-text-color); /* Match muted text color */
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      background: #fff; /* White background */
+      border-right: 1px solid var(--border-color); /* Match table border */
+      width: var(--sidebar-width);
+      padding: 1rem 0; /* Reduced padding */
+      transition: all 0.3s ease;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 900;
+      margin-top: 56px; /* Adjust for header height */
+    }
+
+    .sidebar-nav {
+      padding: 0;
+    }
+
+    .nav-item {
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-link {
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem; /* Match table padding */
+      border-radius: 6px; /* Match table button border-radius */
+      color: var(--muted-text-color); /* Match muted text color */
+      font-weight: 500; /* Match table font weight */
+      font-size: 0.875rem; /* Match table font size */
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; /* Smaller gap */
+    }
+
+    .nav-link:hover {
+      background: var(--secondary-color); /* Match table hover background */
+      color: var(--text-color); /* Match primary text color */
+    }
+
+    .nav-link.active {
+      background: var(--primary-color); /* Match primary color */
+      color: #fff;
+      box-shadow: none; /* Remove shadow for a flatter design */
+    }
+
+    .nav-link i {
+      font-size: 1rem; /* Smaller icons */
+    }
+
+    .nav-content .nav-link {
+      padding-left: 2.5rem; /* Adjusted for hierarchy */
+      font-size: 0.875rem; /* Match table font size */
+      font-weight: 400; /* Lighter weight for sub-items */
+    }
+
+    .nav-content .nav-link.active {
+      background: var(--secondary-color); /* Match table hover background */
+      color: var(--primary-color); /* Match primary color */
+    }
+
+    .nav-content .nav-link i {
+      font-size: 0.875rem; /* Smaller icons for sub-items */
+    }
+
+    /* Responsive Styles */
     @media (max-width: 768px) {
       .sidebar {
-        position: fixed;
-        height: 100vh;
         transform: translateX(-100%);
-        z-index: 1000;
+        margin-top: 0; /* Adjust for mobile */
       }
       .sidebar.show {
         transform: translateX(0);
       }
       .header {
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 1rem;
+      }
+      .logo span {
+        font-size: 1rem;
+      }
+      .nav-profile span {
+        display: none; /* Hide name on mobile */
       }
     }
   </style>
@@ -189,12 +259,14 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 <body>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
       <a href="index.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">Admin Dashboard</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+      <button class="toggle-sidebar-btn">
+        <i class="bi bi-list"></i>
+      </button>
     </div>
 
     <nav class="header-nav ms-auto">
@@ -314,4 +386,3 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
       });
     });
   </script>
-</body>
