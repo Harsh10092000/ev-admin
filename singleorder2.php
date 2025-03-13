@@ -1,461 +1,263 @@
-<?php
-// Dummy data for the order with 50 fields
-$order = [
-    'order_id' => 'ORD-12345',
-    'date' => 'February 26, 2025',
-    'customer_name' => 'John Doe',
-    'email' => 'john.doe@example.com',
-    'phone' => '+1 (555) 123-4567',
-    'total_amount' => 199.99,
-    'status' => 'Processing',
-    'description' => 'This is a sample order description with custom requirements.',
-    'attached_file' => 'specification_document.pdf',
-    'image_url' => 'https://via.placeholder.com/150', // Dummy image URL
-    'shipping_address' => '123 Main St, City, Country',
-    'billing_address' => '456 Oak Ave, Town, Country',
-    'payment_method' => 'Credit Card',
-    'payment_status' => 'Completed',
-    'tracking_number' => 'TRK-789101',
-    'delivery_date' => 'March 5, 2025',
-    'order_source' => 'Website',
-    'currency' => 'USD',
-    'tax_amount' => 19.99,
-    'discount' => 10.00,
-    'shipping_cost' => 15.00,
-    'item_count' => 3,
-    'weight' => '5.5 kg',
-    'height' => '120 cm',
-    'width' => '80 cm',
-    'depth' => '60 cm',
-    'material' => 'Wood',
-    'color' => 'Brown',
-    'quantity_ordered' => 2,
-    'unit_price' => 99.99,
-    'subtotal' => 189.99,
-    'custom_field_1' => 'Special Coating',
-    'custom_field_2' => 'Fast Delivery',
-    'custom_field_3' => 'Eco-Friendly',
-    'custom_field_4' => 'Assembly Required',
-    'custom_field_5' => 'Gift Wrapped',
-    'customer_id' => 'CUST-98765',
-    'order_type' => 'Retail',
-    'priority' => 'High',
-    'notes' => 'Customer prefers morning delivery.',
-    'warehouse_id' => 'WH-456',
-    'supplier' => 'Furniture Co.',
-    'production_time' => '3 days',
-    'warranty' => '1 Year',
-    'return_policy' => '30 Days',
-    'customer_rating' => '4.5',
-    'last_updated' => 'March 12, 2025 10:00',
-    'created_by' => 'Admin User',
-    'approved_by' => 'Manager John',
-    'invoice_number' => 'INV-54321'
-];
-
-// Dummy order items
-$order_items = [
-    ['product_name' => 'Custom Dining Table', 'quantity' => 1, 'price' => 149.99],
-    ['product_name' => 'Chair Set', 'quantity' => 2, 'price' => 25.00]
-];
-?>
-
-<div class="body-class">
-    <div class="container container-class">
-        <div class="header-class">
-            <h1>Order Details</h1>
-            <span class="status-badge"><?= htmlspecialchars($order['status']) ?></span>
+<?php include "includes/header.php"; ?>
+<main id="main" class="main" style="padding: 2rem; min-height: 100vh; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;  border-radius: 16px; ">
+    
+    <!-- Success Alert (Optional) -->
+    <?php if (isset($_GET['success'])) : ?>
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center gap-2" role="alert" 
+             style="position: relative; border-radius: 12px; padding: 1rem 1.25rem; background: #ecfdf5; border: none; 
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 450px; margin: 0 auto 2rem; font-size: 0.875rem;">
+            <i class="bi bi-check-circle" style="color: #10b981; font-size: 1.25rem; margin-right: 0.5rem;"></i>
+            <span style="color: #1f2937; font-weight: 600;">Order Updated Successfully!</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="opacity: 0.5;"></button>
         </div>
+    <?php endif; ?>
 
-        <!-- Pinned Key Fields Section -->
-        <div class="pinned-section" style="position: sticky; top: 0; background: #ffffff; z-index: 10; padding: 1rem 0; border-bottom: 1px solid #e5e7eb; margin: -30px -30px 20px -30px; padding-left: 30px; padding-right: 30px;">
-            <div class="order-info" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
-                <div class="info-item">
-                    <label>Order ID</label>
-                    <span>#<?= htmlspecialchars($order['order_id']) ?></span>
-                </div>
-                <div class="info-item">
-                    <label>Date of Order</label>
-                    <span><?= htmlspecialchars($order['date']) ?></span>
-                </div>
-                <div class="info-item">
-                    <label>Name</label>
-                    <span><?= htmlspecialchars($order['customer_name']) ?></span>
-                </div>
-                <div class="info-item">
-                    <label>Email</label>
-                    <span><?= htmlspecialchars($order['email']) ?></span>
-                </div>
-                <div class="info-item">
-                    <label>Phone</label>
-                    <span><?= htmlspecialchars($order['phone']) ?></span>
-                </div>
-                <div class="info-item">
-                    <label>Price</label>
-                    <span>₹<?= number_format($order['total_amount'], 2) ?></span>
-                </div>
+    <!-- Page Title -->
+    <div class="pagetitle" style="margin-bottom: 2rem; padding: 1rem;  border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+        <nav aria-label="breadcrumb" style="font-size: 0.75rem; color: #6b7280;">
+            <ol class="breadcrumb mb-0" style="background: none; padding: 0;">
+                <li class="breadcrumb-item"><a href="index.php" style="color: #4b5563; text-decoration: none;">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#" style="color: #4b5563; text-decoration: none;">Orders</a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #374151;">Order Details</li>
+            </ol>
+        </nav>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+            <h5 style=" font-weight: 700; color: #1f2937; letter-spacing: -0.025em;">
+                Order <span style="background: #3b82f6; color: #fff; padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 1.1rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">ORD123456</span>
+            </h5>
+            <div class="d-flex gap-2">
+                <button class="btn btn-export" style="background: #ffffff; color: #4b5563; border: 1px solid #d1d5db; border-radius: 8px; padding: 0.625rem 1.25rem; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                    Export PDF
+                </button>
+                <a href="editorder.php?id=123456" class="btn btn-add" style="background: #3b82f6; color: #fff; border-radius: 8px; padding: 0.625rem 1.25rem; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease; text-decoration: none;">
+                    Edit Order
+                </a>
             </div>
         </div>
-
-        <!-- Multi-Column Grid for All Fields -->
-        <div class="fields-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
-            <!-- Customer Info -->
-            <div class="field-section">
-                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Customer Info</h3>
-                <div class="info-item"><label>Customer ID</label><span><?= htmlspecialchars($order['customer_id']) ?></span></div>
-                <div class="info-item"><label>Email</label><span><?= htmlspecialchars($order['email']) ?></span></div>
-                <div class="info-item"><label>Phone</label><span><?= htmlspecialchars($order['phone']) ?></span></div>
-            </div>
-
-            <!-- Order Info -->
-            <div class="field-section">
-                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Order Info</h3>
-                <div class="info-item"><label>Order ID</label><span>#<?= htmlspecialchars($order['order_id']) ?></span></div>
-                <div class="info-item"><label>Date</label><span><?= htmlspecialchars($order['date']) ?></span></div>
-                <div class="info-item"><label>Status</label><span><?= htmlspecialchars($order['status']) ?></span></div>
-                <div class="info-item"><label>Total Amount</label><span>₹<?= number_format($order['total_amount'], 2) ?></span></div>
-                <div class="info-item"><label>Description</label><span><?= htmlspecialchars($order['description']) ?></span></div>
-                <div class="info-item"><label>Attached File</label><a href="#" class="file-link"><?= htmlspecialchars($order['attached_file']) ?></a></div>
-                <div class="info-item"><label>Order Image</label>
-                    <a href="<?= htmlspecialchars($order['image_url']) ?>" target="_blank" style="text-decoration: none;">
-                        <img src="<?= htmlspecialchars($order['image_url']) ?>" 
-                             style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #e5e7eb; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-                             onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';" 
-                             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';" alt="Order Image">
-                    </a>
-                </div>
-            </div>
-
-            <!-- Logistics -->
-            <div class="field-section">
-                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Logistics</h3>
-                <div class="info-item"><label>Shipping Address</label><span><?= htmlspecialchars($order['shipping_address']) ?></span></div>
-                <div class="info-item"><label>Billing Address</label><span><?= htmlspecialchars($order['billing_address']) ?></span></div>
-                <div class="info-item"><label>Payment Method</label><span><?= htmlspecialchars($order['payment_method']) ?></span></div>
-                <div class="info-item"><label>Payment Status</label><span><?= htmlspecialchars($order['payment_status']) ?></span></div>
-                <div class="info-item"><label>Tracking Number</label><span><?= htmlspecialchars($order['tracking_number']) ?></span></div>
-                <div class="info-item"><label>Delivery Date</label><span><?= htmlspecialchars($order['delivery_date']) ?></span></div>
-                <div class="info-item"><label>Order Source</label><span><?= htmlspecialchars($order['order_source']) ?></span></div>
-                <div class="info-item"><label>Currency</label><span><?= htmlspecialchars($order['currency']) ?></span></div>
-                <div class="info-item"><label>Tax Amount</label><span>₹<?= number_format($order['tax_amount'], 2) ?></span></div>
-                <div class="info-item"><label>Discount</label><span>₹<?= number_format($order['discount'], 2) ?></span></div>
-                <div class="info-item"><label>Shipping Cost</label><span>₹<?= number_format($order['shipping_cost'], 2) ?></span></div>
-            </div>
-
-            <!-- Product Details -->
-            <div class="field-section">
-                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Product Details</h3>
-                <div class="info-item"><label>Item Count</label><span><?= htmlspecialchars($order['item_count']) ?></span></div>
-                <div class="info-item"><label>Weight</label><span><?= htmlspecialchars($order['weight']) ?></span></div>
-                <div class="info-item"><label>Height</label><span><?= htmlspecialchars($order['height']) ?></span></div>
-                <div class="info-item"><label>Width</label><span><?= htmlspecialchars($order['width']) ?></span></div>
-                <div class="info-item"><label>Depth</label><span><?= htmlspecialchars($order['depth']) ?></span></div>
-                <div class="info-item"><label>Material</label><span><?= htmlspecialchars($order['material']) ?></span></div>
-                <div class="info-item"><label>Color</label><span><?= htmlspecialchars($order['color']) ?></span></div>
-                <div class="info-item"><label>Quantity Ordered</label><span><?= htmlspecialchars($order['quantity_ordered']) ?></span></div>
-                <div class="info-item"><label>Unit Price</label><span>₹<?= number_format($order['unit_price'], 2) ?></span></div>
-                <div class="info-item"><label>Subtotal</label><span>₹<?= number_format($order['subtotal'], 2) ?></span></div>
-            </div>
-
-            <!-- Custom Fields -->
-            <div class="field-section">
-                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Custom Fields</h3>
-                <div class="info-item"><label>Custom Field 1</label><span><?= htmlspecialchars($order['custom_field_1']) ?></span></div>
-                <div class="info-item"><label>Custom Field 2</label><span><?= htmlspecialchars($order['custom_field_2']) ?></span></div>
-                <div class="info-item"><label>Custom Field 3</label><span><?= htmlspecialchars($order['custom_field_3']) ?></span></div>
-                <div class="info-item"><label>Custom Field 4</label><span><?= htmlspecialchars($order['custom_field_4']) ?></span></div>
-                <div class="info-item"><label>Custom Field 5</label><span><?= htmlspecialchars($order['custom_field_5']) ?></span></div>
-            </div>
-
-            <!-- Admin Notes -->
-            <div class="field-section">
-                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Admin Notes</h3>
-                <div class="info-item"><label>Order Type</label><span><?= htmlspecialchars($order['order_type']) ?></span></div>
-                <div class="info-item"><label>Priority</label><span><?= htmlspecialchars($order['priority']) ?></span></div>
-                <div class="info-item"><label>Notes</label><span><?= htmlspecialchars($order['notes']) ?></span></div>
-                <div class="info-item"><label>Warehouse ID</label><span><?= htmlspecialchars($order['warehouse_id']) ?></span></div>
-                <div class="info-item"><label>Supplier</label><span><?= htmlspecialchars($order['supplier']) ?></span></div>
-                <div class="info-item"><label>Production Time</label><span><?= htmlspecialchars($order['production_time']) ?></span></div>
-                <div class="info-item"><label>Warranty</label><span><?= htmlspecialchars($order['warranty']) ?></span></div>
-                <div class="info-item"><label>Return Policy</label><span><?= htmlspecialchars($order['return_policy']) ?></span></div>
-                <div class="info-item"><label>Customer Rating</label><span><?= htmlspecialchars($order['customer_rating']) ?></span></div>
-                <div class="info-item"><label>Last Updated</label><span><?= htmlspecialchars($order['last_updated']) ?></span></div>
-                <div class="info-item"><label>Created By</label><span><?= htmlspecialchars($order['created_by']) ?></span></div>
-                <div class="info-item"><label>Approved By</label><span><?= htmlspecialchars($order['approved_by']) ?></span></div>
-                <div class="info-item"><label>Invoice Number</label><span><?= htmlspecialchars($order['invoice_number']) ?></span></div>
-            </div>
-        </div>
-
-        <!-- Order Items Section -->
-        <div class="order-items" style="grid-column: 1 / -1; margin-top: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem;">Order Items</h2>
-            <div class="card" style="border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden;">
-                <table class="table table-hover" style="width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.875rem;">
-                    <thead style="background: #f9fafb; color: #374151; font-weight: 600;">
-                        <tr>
-                            <th style="padding: 1rem; border-bottom: 1px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Product Name</th>
-                            <th style="padding: 1rem; border-bottom: 1px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Quantity</th>
-                            <th style="padding: 1rem; border-bottom: 1px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Price</th>
-                            <th style="padding: 1rem; border-bottom: 1px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($order_items as $item) : ?>
-                            <tr style="transition: all 0.2s ease; background: #fff;">
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151; font-weight: 500;">
-                                    <?= htmlspecialchars($item['product_name']) ?>
-                                </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151; font-weight: 500;">
-                                    <?= htmlspecialchars($item['quantity']) ?>
-                                </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151; font-weight: 500;">
-                                    ₹<?= number_format($item['price'], 2) ?>
-                                </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151; font-weight: 500;">
-                                    ₹<?= number_format($item['quantity'] * $item['price'], 2) ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="actions">
-            <a href="orders.php" class="btn btn-secondary">Back to Orders</a>
-            <button class="btn btn-primary">Update Order</button>
-        </div>
+        <p style="font-size: 1rem; color: #6b7280; margin-top: 0.5rem;">Detailed view of order information and status.</p>
     </div>
-</div>
+
+    <!-- Order Details Section -->
+    <section class="section">
+        <div class="card" style="border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.06); background: #ffffff; border: none; overflow: hidden; transition: all 0.3s ease;">
+            <div class="card-body" style="padding: 2rem;">
+                <!-- Dummy Data -->
+                <?php
+                $orderData = [
+                    'order_id' => 'ORD123456',
+                    'customer_name' => 'John Doe',
+                    'email' => 'john.doe@example.com',
+                    'phone' => '+91-9876543210',
+                    'order_date' => '2025-03-10 14:35:22',
+                    'status' => 'Shipped',
+                    'total_amount' => 12500.75,
+                    'payment_method' => 'Credit Card',
+                    'payment_status' => 'Paid',
+                    'shipping_address' => '123, Green Avenue, Mumbai, Maharashtra, India - 400001',
+                    'billing_address' => '123, Green Avenue, Mumbai, Maharashtra, India - 400001',
+                    'shipping_method' => 'Express Delivery',
+                    'tracking_number' => 'TRK987654321',
+                    'estimated_delivery' => '2025-03-15',
+                    'order_notes' => 'Please deliver before noon.',
+                    'subtotal' => 10500.00,
+                    'tax' => 1500.00,
+                    'discount' => 500.00,
+                    'shipping_cost' => 500.00,
+                    'coupon_code' => 'SAVE50',
+                    'order_weight' => '1.2 kg',
+                    'order_source' => 'Website',
+                    'customer_ip' => '192.168.1.1',
+                    'browser' => 'Chrome 119.0',
+                    'device' => 'Desktop',
+                    'created_by' => 'Admin User',
+                    'last_updated' => '2025-03-11 09:15:00',
+                    'warehouse' => 'Mumbai WH-01',
+                    'invoice_number' => 'INV-123456',
+                    'return_status' => 'None',
+                    'return_reason' => '',
+                    'refund_amount' => 0.00,
+                    'gift_wrap' => 'Yes',
+                    'gift_message' => 'Happy Birthday!',
+                    'priority' => 'High',
+                    'currency' => 'INR',
+                    'language' => 'English',
+                    'order_tags' => 'Urgent, Gift',
+                    'customer_type' => 'Returning',
+                    'loyalty_points_used' => 100,
+                    'loyalty_points_earned' => 125,
+                    'sales_channel' => 'Online Store',
+                ];
+                ?>
+
+                <!-- Grid Layout for Order Details -->
+                <div class="row g-4">
+                    <!-- Left Column -->
+                    <div class="col-lg-6">
+                        <!-- Order Overview -->
+                        <div class="mb-4">
+                            <h2 style="font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Order Overview</h2>
+                            <div class="details-box" style="background: #f9fafb; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                                <p><strong>Customer Name:</strong> <?= htmlspecialchars($orderData['customer_name']) ?></p>
+                                <p><strong>Email:</strong> <?= htmlspecialchars($orderData['email']) ?></p>
+                                <p><strong>Phone:</strong> <?= htmlspecialchars($orderData['phone']) ?></p>
+                                <p><strong>Order Date:</strong> <?= htmlspecialchars($orderData['order_date']) ?></p>
+                                <p><strong>Status:</strong> 
+                                    <span class="badge" style="background: #10b981; color: #fff; padding: 0.375rem 0.75rem; border-radius: 6px;"><?= htmlspecialchars($orderData['status']) ?></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Details -->
+                        <div class="mb-4">
+                            <h2 style="font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Shipping Details</h2>
+                            <div class="details-box" style="background: #f9fafb; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                                <p><strong>Shipping Address:</strong> <?= htmlspecialchars($orderData['shipping_address']) ?></p>
+                                <p><strong>Shipping Method:</strong> <?= htmlspecialchars($orderData['shipping_method']) ?></p>
+                                <p><strong>Tracking Number:</strong> <?= htmlspecialchars($orderData['tracking_number']) ?></p>
+                                <p><strong>Estimated Delivery:</strong> <?= htmlspecialchars($orderData['estimated_delivery']) ?></p>
+                                <p><strong>Order Weight:</strong> <?= htmlspecialchars($orderData['order_weight']) ?></p>
+                            </div>
+                        </div>
+
+                        <!-- Billing Details -->
+                        <div class="mb-4">
+                            <h2 style="font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Billing Details</h2>
+                            <div class="details-box" style="background: #f9fafb; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                                <p><strong>Billing Address:</strong> <?= htmlspecialchars($orderData['billing_address']) ?></p>
+                                <p><strong>Payment Method:</strong> <?= htmlspecialchars($orderData['payment_method']) ?></p>
+                                <p><strong>Payment Status:</strong> <span class="badge" style="background: #10b981; color: #fff; padding: 0.375rem 0.75rem; border-radius: 6px;"><?= htmlspecialchars($orderData['payment_status']) ?></span></p>
+                                <p><strong>Total Amount:</strong> ₹<?= number_format($orderData['total_amount'], 2) ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="col-lg-6">
+                        <!-- Additional Details -->
+                        <div class="mb-4">
+                            <h2 style="font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Additional Details</h2>
+                            <div class="details-box" style="background: #f9fafb; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                                <p><strong>Order Notes:</strong> <?= htmlspecialchars($orderData['order_notes']) ?></p>
+                                <p><strong>Subtotal:</strong> ₹<?= number_format($orderData['subtotal'], 2) ?></p>
+                                <p><strong>Tax:</strong> ₹<?= number_format($orderData['tax'], 2) ?></p>
+                                <p><strong>Discount:</strong> ₹<?= number_format($orderData['discount'], 2) ?></p>
+                                <p><strong>Shipping Cost:</strong> ₹<?= number_format($orderData['shipping_cost'], 2) ?></p>
+                                <p><strong>Coupon Code:</strong> <?= htmlspecialchars($orderData['coupon_code']) ?></p>
+                            </div>
+                        </div>
+
+                        <!-- System & Metadata -->
+                        <div class="mb-4">
+                            <h2 style="font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">System & Metadata</h2>
+                            <div class="details-box" style="background: #f9fafb; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                                <p><strong>Order Source:</strong> <?= htmlspecialchars($orderData['order_source']) ?></p>
+                                <p><strong>Customer IP:</strong> <?= htmlspecialchars($orderData['customer_ip']) ?></p>
+                                <p><strong>Browser:</strong> <?= htmlspecialchars($orderData['browser']) ?></p>
+                                <p><strong>Device:</strong> <?= htmlspecialchars($orderData['device']) ?></p>
+                                <p><strong>Created By:</strong> <?= htmlspecialchars($orderData['created_by']) ?></p>
+                                <p><strong>Last Updated:</strong> <?= htmlspecialchars($orderData['last_updated']) ?></p>
+                                <p><strong>Warehouse:</strong> <?= htmlspecialchars($orderData['warehouse']) ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Full-width Section for Remaining Data -->
+                    <div class="col-12">
+                        <h2 style="font-size: 1.25rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Miscellaneous</h2>
+                        <div class="details-box" style="background: #f9fafb; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><strong>Invoice Number:</strong> <?= htmlspecialchars($orderData['invoice_number']) ?></p>
+                                    <p><strong>Return Status:</strong> <?= htmlspecialchars($orderData['return_status']) ?></p>
+                                    <p><strong>Return Reason:</strong> <?= htmlspecialchars($orderData['return_reason']) ?></p>
+                                    <p><strong>Refund Amount:</strong> ₹<?= number_format($orderData['refund_amount'], 2) ?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Gift Wrap:</strong> <?= htmlspecialchars($orderData['gift_wrap']) ?></p>
+                                    <p><strong>Gift Message:</strong> <?= htmlspecialchars($orderData['gift_message']) ?></p>
+                                    <p><strong>Priority:</strong> <?= htmlspecialchars($orderData['priority']) ?></p>
+                                    <p><strong>Currency:</strong> <?= htmlspecialchars($orderData['currency']) ?></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Language:</strong> <?= htmlspecialchars($orderData['language']) ?></p>
+                                    <p><strong>Order Tags:</strong> <?= htmlspecialchars($orderData['order_tags']) ?></p>
+                                    <p><strong>Customer Type:</strong> <?= htmlspecialchars($orderData['customer_type']) ?></p>
+                                    <p><strong>Sales Channel:</strong> <?= htmlspecialchars($orderData['sales_channel']) ?></p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <p><strong>Loyalty Points Used:</strong> <?= htmlspecialchars($orderData['loyalty_points_used']) ?></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Loyalty Points Earned:</strong> <?= htmlspecialchars($orderData['loyalty_points_earned']) ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <style>
-    .body-class {
-        background: #ffffff;
-        margin: 0;
-        padding: 40px 20px;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        color: #2d3748;
-    }
-
-    .container-class {
-        max-width: 1400px;
-        width: 100%;
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        border: none;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .container-class::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(to right, #3b82f6, #10b981);
-    }
-
-    .header-class {
-        padding-bottom: 20px;
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #e5e7eb;
-    }
-
-    .header-class h1 {
-        color: #1f2937;
-        font-size: 1.75rem;
-        font-weight: 700;
-        margin: 0;
-        letter-spacing: -0.025em;
-    }
-
-    .status-badge {
-        padding: 6px 12px;
-        background: #ecfdf5;
-        color: #10b981;
-        border-radius: 12px;
-        font-size: 0.875rem;
-        font-weight: 600;
-    }
-
-    .order-info {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 20px;
-    }
-
-    .info-item {
-        background: #f9fafb;
-        padding: 0.75rem;
-        border-radius: 8px;
-        border: 1px solid #e5e7eb;
-        margin-bottom: 0.5rem;
+    .main {
+        margin: 0 auto;
+        padding: 2rem;
+        border-radius: 16px;
         transition: all 0.3s ease;
     }
 
-    .info-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        background: #ffffff;
+    
+
+    .details-box {
+        transition: all 0.3s ease;
     }
 
-    .info-item label {
-        font-weight: 600;
-        color: #6b7280;
-        display: block;
-        margin-bottom: 0.25rem;
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+    .details-box:hover {
+        /* background: #f1f5f9; */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    .info-item span {
+    .details-box p {
+        margin: 0.5rem 0;
+        font-size: 0.875rem;
         color: #374151;
-        font-size: 0.875rem;
-        font-weight: 500;
-        word-break: break-word;
     }
 
-    .file-link {
-        color: #3b82f6;
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s ease;
+    .details-box strong {
+        color: #1f2937;
+        font-weight: 600;
+        display: inline-block;
+        min-width: 150px;
     }
 
-    .file-link:hover {
-        color: #2563eb;
-        text-decoration: underline;
-    }
-
-    .actions {
-        grid-column: 1 / -1;
-        margin-top: 30px;
-        display: flex;
-        gap: 15px;
-        justify-content: flex-end;
-    }
-
-    .btn {
-        padding: 0.625rem 1.25rem;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 500;
-        font-size: 0.875rem;
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .btn-primary {
-        background: #3b82f6;
-        color: #ffffff;
-        border: none;
-    }
-
-    .btn-primary:hover {
+    .btn-add:hover {
         background: #2563eb;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
-    .btn-secondary {
-        background: #ffffff;
-        color: #4b5563;
-    }
-
-    .btn-secondary:hover {
+    .btn-export:hover {
         background: #f3f4f6;
         border-color: #9ca3af;
-        transform: translateY(-1px);
-    }
-
-    .table td, .table th {
-        border-color: #e5e7eb;
-        padding: 1rem;
-    }
-
-    .table tbody tr:hover {
-        background: #f8fafc;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        transition: all 0.2s ease;
-    }
-
-    .table thead th {
-        background: #f9fafb;
-        color: #374151;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-        padding: 1rem;
-        border-bottom: 1px solid #e5e7eb;
-        position: relative;
-    }
-
-    .table tbody td {
-        color: #374151;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
-
-    @media (max-width: 1024px) {
-        .fields-grid {
-            grid-template-columns: 1fr;
-        }
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
     @media (max-width: 768px) {
-        .body-class {
-            padding: 20px 10px;
+        .main {
+            padding: 1.5rem;
+            border-radius: 0;
         }
-
-        .container-class {
-            padding: 20px;
+        .pagetitle h1 {
+            font-size: 1.5rem;
         }
-
-        .order-info {
-            grid-template-columns: 1fr;
-        }
-
-        .header-class {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .pinned-section {
-            top: 0;
-            margin: -20px -20px 20px -20px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .actions {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .table td, .table th {
-            padding: 0.75rem;
-        }
-
-        .table {
-            display: block;
-            overflow-x: auto;
-            white-space: nowrap;
+        .details-box strong {
+            min-width: 100px;
         }
     }
 </style>
+
+<?php include "includes/footer.php" ?>
