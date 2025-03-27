@@ -40,7 +40,8 @@
     }
 
     body {
-      background: #f9fafb; /* Match table background */
+      
+      background-color: white;
       color: var(--text-color);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; /* Match table typography */
     }

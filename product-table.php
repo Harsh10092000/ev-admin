@@ -41,29 +41,29 @@
                 <table class="datatable table table-hover mb-0" style="width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.875rem;">
                     <thead style="background: #f3f4f6; color: #374151; font-weight: 600;">
                         <tr>
-                            <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; position: relative;">
-                                Sno. <span class="sort-indicator" style="display: inline-block; margin-left: 0.25rem; color: #9ca3af; font-size: 0.625rem;">▲▼</span>
+                            <th class="table-head-inline">
+                                Sno. <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                            <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; position: relative;">
-                                Image <span class="sort-indicator" style="display: inline-block; margin-left: 0.25rem; color: #9ca3af; font-size: 0.625rem;">▲▼</span>
+                            <th class="table-head-inline">
+                                Image <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                            <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; position: relative;">
-                                Name <span class="sort-indicator" style="display: inline-block; margin-left: 0.25rem; color: #9ca3af; font-size: 0.625rem;">▲▼</span>
+                            <th class="table-head-inline">
+                                Name <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                            <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; position: relative;">
-                                Main Category <span class="sort-indicator" style="display: inline-block; margin-left: 0.25rem; color: #9ca3af; font-size: 0.625rem;">▲▼</span>
+                            <th class="table-head-inline">
+                                Main Category <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                            <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; position: relative;">
-                                Category <span class="sort-indicator" style="display: inline-block; margin-left: 0.25rem; color: #9ca3af; font-size: 0.625rem;">▲▼</span>
+                            <th class="table-head-inline">
+                                Category <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                            <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; position: relative;">
-                                Subcategory <span class="sort-indicator" style="display: inline-block; margin-left: 0.25rem; color: #9ca3af; font-size: 0.625rem;">▲▼</span>
+                            <th class="table-head-inline">
+                                Subcategory <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                            <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; position: relative;">
-                                Brand <span class="sort-indicator" style="display: inline-block; margin-left: 0.25rem; color: #9ca3af; font-size: 0.625rem;">▲▼</span>
+                            <th class="table-head-inline">
+                                Brand <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                            <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; position: relative;">
-                                Price <span class="sort-indicator" style="display: inline-block; margin-left: 0.25rem; color: #9ca3af; font-size: 0.625rem;">▲▼</span>
+                            <th class="table-head-inline">
+                                Price <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
                             <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Actions</th>
                         </tr>
@@ -71,10 +71,10 @@
                     <tbody>
                         <?php $count = 1; while ($getData = $result->fetch_assoc()) { ?>
                             <tr style="transition: all 0.2s ease; background: #fff;">
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151; font-weight: 500;">
+                                <td style=" font-weight: 500;">
                                     <?= $count++ ?>
                                 </td>
-                                <td style="padding: 1rem; vertical-align: middle;">
+                                <td class="table-data-inline" style="padding: 1rem; vertical-align: middle;">
                                     <a href="../dashboard/assets/products/<?= htmlspecialchars($getData['p_image']) ?>" target="_blank" style="text-decoration: none;">
                                         <img src="../dashboard/assets/products/<?= htmlspecialchars($getData['p_image']) ?>" 
                                              style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px; border: 1px solid #e5e7eb; transition: transform 0.3s ease, box-shadow 0.3s ease;"
@@ -82,25 +82,25 @@
                                              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';" alt="Product Image">
                                     </a>
                                 </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151; font-weight: 500;">
+                                <td class="table-data-inline" style=" font-weight: 500;">
                                     <?= htmlspecialchars($getData['p_name']) ?>
                                 </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151;">
+                                <td class="table-data-inline" style="">
                                     <?= htmlspecialchars($getData['p_main_category']) ?>
                                 </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151;">
+                                <td class="table-data-inline" style="">
                                     <?= htmlspecialchars($getData['p_category_type']) ?>
                                 </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151;">
+                                <td class="table-data-inline" style="">
                                     <?= htmlspecialchars($getData['p_subcategory']) ?>
                                 </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151;">
+                                <td class="table-data-inline" style="">
                                     <?= htmlspecialchars($getData['p_brand']) ?>
                                 </td>
-                                <td style="padding: 1rem; vertical-align: middle; color: #374151; font-weight: 500;">
+                                <td class="table-data-inline" style=" font-weight: 500;">
                                     ₹<?= number_format($getData['p_price'], 2) ?>
                                 </td>
-                                <td style="padding: 1rem; vertical-align: middle;">
+                                <td class="table-data-inline" style="padding: 1rem; vertical-align: middle;">
                                     <div class="d-flex gap-2">
                                         <a href="editproduct2.php?id=<?= $getData['p_id'] ?>" class="btn btn-sm" 
                                            style="background: #ffffff; color: #4b5563; border: 1px solid #d1d5db; border-radius: 6px; padding: 0.375rem 0.875rem; 
@@ -136,6 +136,34 @@
         border-radius: 16px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     } */
+
+    .section {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        border-radius: 5px;
+    }
+
+    .table-head-inline {
+       padding: 1rem;
+       border-bottom: 2px solid #e5e7eb;
+       text-transform: uppercase; 
+       font-size: 0.95rem; 
+       letter-spacing: 0.05em; 
+       position: relative;"
+    }
+
+    .table-head-inline-span {
+        display: inline-block; 
+        margin-left: 0.25rem; 
+        color: #9ca3af; 
+        font-size: 0.625rem;
+    }
+
+
+    .table-data-inline {
+        padding: 1rem;
+        vertical-align: middle; 
+        color: #374151;
+    }
 
     .table-hover tbody tr:hover {
         background: #f8fafc;
@@ -184,7 +212,7 @@
     }
 
     .datatable-table > thead > tr > th:hover {
-        background: #e5e7eb;
+        background:rgb(235, 236, 239);
         color: #1f2937;
     }
 
@@ -272,7 +300,7 @@
     .datatable-top, .datatable-bottom {
         padding: 1rem;
         background: #f9fafb;
-        border-top: 1px solid #e5e7eb;
+        /* border-top: 1px solid #e5e7eb; */
         font-size: 0.75rem;
         color: #6b7280;
     }
