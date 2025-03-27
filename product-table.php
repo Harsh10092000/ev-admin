@@ -71,7 +71,7 @@
                     <tbody>
                         <?php $count = 1; while ($getData = $result->fetch_assoc()) { ?>
                             <tr style="transition: all 0.2s ease; background: #fff;">
-                                <td style=" font-weight: 500;">
+                                <td class="table-data-inline" style=" font-weight: 500;">
                                     <?= $count++ ?>
                                 </td>
                                 <td class="table-data-inline" style="padding: 1rem; vertical-align: middle;">
@@ -129,17 +129,10 @@
 </main>
 
 <style>
-    /* .main {
-        margin: 0 auto;
-        padding: 2rem;
-        background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    } */
 
     .section {
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-        border-radius: 5px;
+        border-radius: 12px;
     }
 
     .table-head-inline {
@@ -156,13 +149,15 @@
         margin-left: 0.25rem; 
         color: #9ca3af; 
         font-size: 0.625rem;
+        
     }
 
 
     .table-data-inline {
-        padding: 1rem;
-        vertical-align: middle; 
+        padding: 1rem !important;
+        vertical-align: middle !important; 
         color: #374151;
+        
     }
 
     .table-hover tbody tr:hover {
