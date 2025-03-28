@@ -30,28 +30,22 @@ $stmt1->bind_param("i", $id);
 $stmt1->execute();
 $result1 = $stmt1->get_result();
 
-
-
 if (!$getData) {
     die("No vehicle found with ID: " . htmlspecialchars($id));
 }
 
-// Helper function to display values with "-" for null/empty
 function displayValue($value) {
     return htmlspecialchars(empty($value) ? '-' : $value);
 }
 
-// Helper function to format "other_features" (assuming it's a comma-separated string)
 function formatOtherFeatures($features) {
     if (empty($features)) {
         return '-';
     }
-    // Split by comma, trim whitespace, and filter out empty items
     $featureList = array_filter(array_map('trim', explode(',', $features)));
     if (empty($featureList)) {
         return '-';
     }
-    // Return as an unordered list
     return '<ul style="margin: 0; padding-left: 1rem;">' . 
            implode('', array_map(fn($item) => "<li>" . htmlspecialchars($item) . "</li>", $featureList)) . 
            '</ul>';
