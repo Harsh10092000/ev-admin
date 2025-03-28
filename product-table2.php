@@ -1,9 +1,3 @@
-<?php 
-    function displayValue($value) {
-        return htmlspecialchars(empty($value) ? '-' : $value);
-    }
-?>
-
 <main id="main" class="main" style="padding: 2rem; min-height: 100vh; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;  box-shadow: 0 2px 4px rgba(0,0,0,0.02); border-radius: 16px;">
     <?php if (isset($_GET['success'])) : ?>
         <div class="alert alert-success alert-dismissible fade show d-flex align-items-center gap-2" role="alert" 
@@ -29,10 +23,10 @@
                 <p style="font-size: 1rem; color: #6b7280; margin-top: 0.5rem;">Track and manage your product catalog efficiently.</p>
             </div>
             <div class="d-flex gap-2">
-                <!-- <button class="btn btn-export" style="background: #ffffff; color: #4b5563; border: 1px solid #d1d5db; border-radius: 8px; padding: 0.625rem 1.25rem; 
+                <button class="btn btn-export" style="background: #ffffff; color: #4b5563; border: 1px solid #d1d5db; border-radius: 8px; padding: 0.625rem 1.25rem; 
                            font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.3s ease;">
                     Export
-                </button> -->
+                </button>
                 <a href="addproduct.php" class="btn btn-add" style="background: #3b82f6; color: #fff; border-radius: 8px; padding: 0.625rem 1.25rem; 
                     font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease; text-decoration: none;">
                     Add Product
@@ -50,23 +44,27 @@
                             <th class="table-head-inline">
                                 Sno. <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                            
                             <th class="table-head-inline">
-                                Model Name <span class="sort-indicator" table-head-inline-span>▲▼</span>
+                                Image <span class="sort-indicator" table-head-inline-span>▲▼</span>
+                            </th>
+                            <th class="table-head-inline">
+                                Name <span class="sort-indicator" table-head-inline-span>▲▼</span>
+                            </th>
+                            <th class="table-head-inline">
+                                Main Category <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
                             <th class="table-head-inline">
                                 Category <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
                             <th class="table-head-inline">
-                            Motor Type <span class="sort-indicator" table-head-inline-span>▲▼</span>
+                                Subcategory <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
                             <th class="table-head-inline">
-                            Controller <span class="sort-indicator" table-head-inline-span>▲▼</span>
+                                Brand <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
                             <th class="table-head-inline">
-                            Load Capacity: <span class="sort-indicator" table-head-inline-span>▲▼</span>
+                                Price <span class="sort-indicator" table-head-inline-span>▲▼</span>
                             </th>
-                           
                             <th style="padding: 1rem; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Actions</th>
                         </tr>
                     </thead>
@@ -76,40 +74,42 @@
                                 <td class="table-data-inline" style=" font-weight: 500;">
                                     <?= $count++ ?>
                                 </td>
-                                
+                                <td class="table-data-inline" style="padding: 1rem; vertical-align: middle;">
+                                    <a href="../dashboard/assets/products/<?= htmlspecialchars($getData['p_image']) ?>" target="_blank" style="text-decoration: none;">
+                                        <img src="../dashboard/assets/products/<?= htmlspecialchars($getData['p_image']) ?>" 
+                                             style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px; border: 1px solid #e5e7eb; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                             onmouseover="this.style.transform='scale(1.15)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';" 
+                                             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';" alt="Product Image">
+                                    </a>
+                                </td>
                                 <td class="table-data-inline" style=" font-weight: 500;">
-                                    <?= displayValue($getData['model_name']) ?>
+                                    <?= htmlspecialchars($getData['p_name']) ?>
                                 </td>
                                 <td class="table-data-inline" style="">
-                                    <?= displayValue($getData['category']) ?>
+                                    <?= htmlspecialchars($getData['p_main_category']) ?>
                                 </td>
                                 <td class="table-data-inline" style="">
-                                    <?= displayValue($getData['motor_type']) ?>
+                                    <?= htmlspecialchars($getData['p_category_type']) ?>
                                 </td>
                                 <td class="table-data-inline" style="">
-                                    <?= displayValue($getData['controller']) ?>
+                                    <?= htmlspecialchars($getData['p_subcategory']) ?>
                                 </td>
                                 <td class="table-data-inline" style="">
-                                    <?= displayValue($getData['load_capacity']) ?>
+                                    <?= htmlspecialchars($getData['p_brand']) ?>
                                 </td>
-                               
+                                <td class="table-data-inline" style=" font-weight: 500;">
+                                    ₹<?= number_format($getData['p_price'], 2) ?>
+                                </td>
                                 <td class="table-data-inline" style="padding: 1rem; vertical-align: middle;">
                                     <div class="d-flex gap-2">
-                                    <a href="singleorder.php?id=<?= $getData['id'] ?>" class="btn btn-sm" 
-                                           style="background: #ffffff; color: #4b5563; border: 1px solid #d1d5db; border-radius: 6px; padding: 0.375rem 0.875rem; 
-                                                  font-size: 0.75rem; transition: all 0.3s ease; text-decoration: none;"
-                                           onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';"
-                                           onmouseout="this.style.background='#ffffff'; this.style.borderColor='#d1d5db';">
-                                            View
-                                        </a>
-                                        <a href="editproduct2.php?id=<?= $getData['id'] ?>" class="btn btn-sm" 
+                                        <a href="editproduct2.php?id=<?= $getData['p_id'] ?>" class="btn btn-sm" 
                                            style="background: #ffffff; color: #4b5563; border: 1px solid #d1d5db; border-radius: 6px; padding: 0.375rem 0.875rem; 
                                                   font-size: 0.75rem; transition: all 0.3s ease; text-decoration: none;"
                                            onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#9ca3af';"
                                            onmouseout="this.style.background='#ffffff'; this.style.borderColor='#d1d5db';">
                                             Edit
                                         </a>
-                                        <a href="actions/deleteProduct.php?id=<?= $getData['id'] ?>" class="btn btn-sm" 
+                                        <a href="actions/deleteProduct.php?id=<?= $getData['p_id'] ?>" class="btn btn-sm" 
                                            style="background: #fee2e2; color: #991b1b; border-radius: 6px; padding: 0.375rem 0.875rem; 
                                                   font-size: 0.75rem; transition: all 0.3s ease; text-decoration: none;"
                                            onmouseover="this.style.background='#fecaca';" 
@@ -117,7 +117,6 @@
                                            onclick="return confirm('Are you sure you want to delete this product?');">
                                             Delete
                                         </a>
-                                        
                                     </div>
                                 </td>
                             </tr>

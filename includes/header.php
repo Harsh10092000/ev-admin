@@ -327,30 +327,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
               <span>View All Products</span>
             </a>
           </li>
-          <li>
-            <a href="men.php" class="<?= ($activePage == 'men') ? 'active' : '' ?>">
-              <i class="bi bi-person-standing"></i>
-              <span>Men's Products</span>
-            </a>
-          </li>
-          <li>
-            <a href="women.php" class="<?= ($activePage == 'women') ? 'active' : '' ?>">
-              <i class="bi bi-person-standing-dress"></i>
-              <span>Women's Products</span>
-            </a>
-          </li>
-          <li>
-            <a href="kids.php" class="<?= ($activePage == 'kids') ? 'active' : '' ?>">
-              <i class="bi bi-emoji-smile"></i>
-              <span>Kids' Products</span>
-            </a>
-          </li>
-          <li>
-            <a href="other.php" class="<?= ($activePage == 'other') ? 'active' : '' ?>">
-              <i class="bi bi-box"></i>
-              <span>Other Products</span>
-            </a>
-          </li>
+         
         </ul>
       </li>
     </ul>

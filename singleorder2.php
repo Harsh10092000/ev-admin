@@ -1,4 +1,17 @@
-<?php include "includes/header.php"; ?>
+<?php 
+include "includes/header.php"; 
+include "includes/session.php";
+if ($_SESSION['username'] === '') {
+    header("Location:pages-login.php");
+}
+include "includes/connection.php";
+$id = $_GET['id'];
+$success = false;
+$stmt = $conn->prepare("SELECT * from vehicles where id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$getData = $result->fetch_assoc();?>
 <main id="main" class="main" style="padding: 2rem; min-height: 100vh; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;  border-radius: 16px; ">
     
     <!-- Success Alert (Optional) -->
